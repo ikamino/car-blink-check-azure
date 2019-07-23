@@ -5,7 +5,7 @@ assert subscription_key
 
 face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
 
-images = ['https://cdn.discordapp.com/attachments/413154933278507008/603272125884923947/20190723_100739.jpg','https://media.discordapp.net/attachments/413154933278507008/603272127176507392/20190723_100743.jpg?width=681&height=908', 'https://cdn.discordapp.com/attachments/413154933278507008/603298808495079424/20190723_114654.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603298809493192776/20190723_114701_HDR.jpg']
+images = ['https://cdn.discordapp.com/attachments/413154933278507008/603272125884923947/20190723_100739.jpg','https://media.discordapp.net/attachments/413154933278507008/603272127176507392/20190723_100743.jpg?width=681&height=908']
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 
 params = { 
@@ -26,12 +26,13 @@ for image in images:
     face_data = data[0]
     faceLandmarks = (face_data['faceLandmarks'])
 
-    print (faceLandmarks)
-    pupilLeft = faceLandmarks['pupilLeft']
-    pupilRight = faceLandmarks['pupilRight']
+    #print (faceLandmarks)
+   
+    #use classifier (SciKit Learn)
+    eyeLeftTop = faceLandmarks['eyeLeftTop']
+    eyeLeftBottom = faceLandmarks['eyeLeftBottom']
 
+    print ("Eye Left Top:", eyeLeftTop, "Eye Left Bottom:", eyeLeftBottom)
 
-
-    print ("Pupil Left:", pupilLeft)
-    print ("Pupil Right:", pupilRight)
+    #can we use occulsion on pupils?
 
