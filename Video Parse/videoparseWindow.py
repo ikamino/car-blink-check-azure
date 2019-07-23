@@ -1,3 +1,10 @@
+'''
+video parsing for PCs with Windows operation system.
+Purpose: 
+    video is parsed to frames and stored into a folder called 'data'
+'''
+
+
 import cv2
 import numpy as np
 import os
