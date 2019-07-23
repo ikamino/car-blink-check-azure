@@ -17,7 +17,7 @@ while(True):
     ret, frame = cap.read()
 
     # Saves image of the current frame in jpg file
-    name = './data/frame' + str(currentFrame) + '.jpg'
+    name = './data/frame' + str(currentFrame) + '.png'
     print ('Creating...' + name)
     cv2.imwrite(name, frame)
 
