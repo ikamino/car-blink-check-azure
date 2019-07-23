@@ -1,4 +1,7 @@
 
+'''
+real time record video off of camera then parse video into individual frames
+'''
 import cv2
 import numpy as np
 import os
@@ -12,7 +15,7 @@ except OSError:
 
 
 start = time.time()
-start2 = start + 3
+start2 = start + 60
 currentFrame = 0
 while time.time() <= start2:
     cap = cv2.VideoCapture(0) 
