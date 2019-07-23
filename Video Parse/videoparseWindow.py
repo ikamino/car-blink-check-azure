@@ -1,16 +1,8 @@
-'''
-video parsing for PCs with Windows operation system.
-Purpose: 
-    video is parsed to frames and stored into a folder called 'data'
-'''
-
 
 import cv2
 import numpy as np
 import os
-
-# Playing video from file:
-cap = cv2.VideoCapture('example.mp4')
+import time
 
 try:
     if not os.path.exists('data'):
@@ -18,18 +10,19 @@ try:
 except OSError:
     print ('Error: Creating directory of data')
 
+
+start = time.time()
+start2 = start + 3
 currentFrame = 0
-while(True):
-    # Capture frame-by-frame
+while time.time() <= start2:
+    cap = cv2.VideoCapture(0) 
     ret, frame = cap.read()
     if ret == False: 
         break
-    # Saves image of the current frame in jpg file
     name = './data/frame' + str(currentFrame) + '.png'
     print ('Creating...' + name)
     cv2.imwrite(name, frame)
-
-    # To stop duplicate images
+    
     currentFrame += 1
     
 
