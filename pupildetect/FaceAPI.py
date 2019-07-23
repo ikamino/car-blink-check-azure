@@ -23,7 +23,6 @@ for image in images:
 
 
     data = response.json()
-    print (data)
     face_data = data[0]
     faceLandmarks = (face_data['faceLandmarks'])
 
@@ -35,7 +34,6 @@ for image in images:
     eyeRightTop = faceLandmarks['eyeRightTop']
     eyeRightBottom = faceLandmarks ['eyeRightBottom']
     print ("Eye Left Top:", eyeLeftTop, "Eye Left Bottom:", eyeLeftBottom)
-    print ("Eye Right Top:", eyeRightTop, "Eye Right Bottom",eyeRightBottom)
 
 # ;sldjfkl;adjsfl;kadslfjasl;dkjfkl;dsjf
 
