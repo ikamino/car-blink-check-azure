@@ -8,6 +8,8 @@ face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 # images = ['https://cdn.discordapp.com/attachments/413154933278507008/603333810641436682/IMG_20190723_140937.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603333810641436684/IMG_20190723_140941.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603315366583599135/Photo_on_2019-07-23_at_12.59_PM.jpg','https://cdn.discordapp.com/attachments/413154933278507008/603315365212323863/Photo_on_2019-07-23_at_12.59_PM_3.jpg','https://cdn.discordapp.com/attachments/413154933278507008/603326326480568340/IMG_20190723_134117.jpg','https://cdn.discordapp.com/attachments/413154933278507008/603326327277355053/IMG_20190723_134115.jpg']
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 
+open_list = []
+close_list = []
 
 opened = ['https://cdn.discordapp.com/attachments/413154933278507008/603333810641436682/IMG_20190723_140937.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603315366583599135/Photo_on_2019-07-23_at_12.59_PM.jpg' , 'https://cdn.discordapp.com/attachments/413154933278507008/603326327277355053/IMG_20190723_134115.jpg']
 closed = ['https://cdn.discordapp.com/attachments/413154933278507008/603333810641436684/IMG_20190723_140941.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603315365212323863/Photo_on_2019-07-23_at_12.59_PM_3.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603326326480568340/IMG_20190723_134117.jpg']
@@ -46,6 +48,9 @@ for image in opened:
     y2 = (eyeLeftBottom['y'])
 
     print ('Open Values:', y2-y1)
+    open_values = y2-y1
+    open_list.append(open_values)
+    
 
 
 print ("\n \n \n " )
@@ -78,6 +83,24 @@ for image in closed:
     y2 = (eyeLeftBottom['y'])
 
     print ('Closed Values:', y2-y1)
+    close_values = y2-y1
+    close_list.append(close_values)
+
+print("\n \n \n ")
+
+print('Open Values: ', open_list)
+print('Close List: ' , close_list)
+
+#number of terms in each list
+count_open_list = len(open_list) 
+count_close_list = len(close_list)
+
+print("\n \n")
+print('There are ', count_open_list, ' terms in the open list.')
+print('There are ', count_close_list, ' terms in the close list.')
+
+
+
 # ;sldjfkl;adjsfl;kadslfjasl;dkjfkl;dsjf
 
     # face_data = data[0]
