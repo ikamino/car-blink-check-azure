@@ -1,6 +1,8 @@
 
 '''
 real time record video off of camera then parse video into individual frames
+clientID: a230297bd00d52a
+clientSecret: 0cb3594114f3a9bb95e2271d772c5261276d9b23
 '''
 import cv2
 import numpy as np
