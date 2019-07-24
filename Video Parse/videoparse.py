@@ -26,7 +26,13 @@ def imgur(name):
 
 client_id = 'a230297bd00d52a'
 
-os_type = int (input('press 0 if you are using an iphone/mac and 1 if you are usign an android phone/windows PC '))
+os_type = int (input('press 0 if you only have a front camera and 1 if you have a fron and back camera '))
+if os_type == 0: 
+    print ("Are you sure you only have a front camera? type 'y' for yes and 'n' for no")
+elif os_type == 1: 
+    print ("Are you sure you have a front and back camera? type 'y' for yes and 'n' for no")
+verifying_type = str(input(' '))
+#recording video
 
 start = time.time() + 6
 currentFrame = 0
