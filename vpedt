@@ -12,50 +12,46 @@ import cv2
 import numpy as np
 import os
 import time
-import glob
-import shutil
-#determine whether to capture images with front or back camera
-os_type = int (input('press 0 if you only have a front camera and 1 if you have a front and back camera '))
-if os_type == 0: 
-    print ("Are you sure you only have a front camera? type 'y' for yes and 'n' for no")
-elif os_type == 1: 
-    print ("Are you sure you have a front and back camera? type 'y' for yes and 'n' for no")
-verifying_type = str(input(' '))
+import json
+import urllib.request
+import urllib.parse
+import base64
+import time
 
-#recording video
-if not os.path.exists('data') == False:
-    clr_data = glob.glob('./data/*')
-    for c in clr_data: 
-        os.remove(c)
-else:
-    try:
-        if not os.path.exists('data'):
-            os.makedirs('data')
-    except OSError:
-        print ('Error: Unable to create folder for data storage')
+def imgur():
+    f = open("frame" + str(currentFrame) + ".png", "rb")
+    image_data = f.read()
+    b64_image = base64.standard_b64encode(image_data)
+    headers = {'Authorization': 'Client-ID ' + client_id}
+    data = {'image': b64_image, 'title': 'test'} # create a dictionary.
+    request = urllib.request.Request(url="https://api.imgur.com/3/upload.json", data=urllib.parse.urlencode(data).encode("utf-8"),headers=headers)
+    response = urllib.request.urlopen(request).read()
+    parse = json.loads(response)
+    print (parse['data']['link'])
 
-if verifying_type == 'y': 
-    start = time.time() + 3
-    currentFrame = 0
-    cap = cv2.VideoCapture(os_type) 
-    while time.time() <= start:
-        ret, frame = cap.read()
-        name = './data/frame' + str(currentFrame) + '.png'
-        print ('Creating...' + name)
-        cv2.imwrite(name, frame)
-        currentFrame += 1
-    # When everything done, release the capture
+client_id = 'a230297bd00d52a'
+
+try:
+    if not os.path.exists('data'):
+        os.makedirs('data')
+except OSError:
+    print ('Error: Creating directory of data')
+    
+    
+os_type = int (input('press 0 if you are using an iphone/mac and 1 if you are usign an android phone/windows PC '))
+
+start = time.time() + 6
+#start2 = start + 12
+currentFrame = 0
+cap = cv2.VideoCapture(os_type) 
+while time.time() <= start:
+    ret, frame = cap.read()
+    name = './frame' + str(currentFrame) + '.png'
+    print ('Creating...' + name)
+    cv2.imwrite(name, frame)
+    imgur()
+    os.remove(name)
+    currentFrame += 1
+# Stop recording
 cv2.destroyAllWindows()
 cap.release()
-'''
-AFTER RECORDING, WE SEND ALL FRAMES TO IMGUR
-'''
-
-
-
-
-
-if verifying_type == 'n': 
-        print ('refresh program')
-
-#cv2.destroyAllWindows()'''
