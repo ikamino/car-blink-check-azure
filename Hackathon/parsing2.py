@@ -1,23 +1,11 @@
+
 '''
-Using OpenCV takes a mp4 video and produces a number of images.
-
-Requirements
-----
-You require OpenCV 3.2 to be installed.
-
-Run
-----
-Open the main.py and edit the path to the video. Then run:
-$ python main.py
-
-Which will produce a folder called data with the images. There will be 2000+ images for example.mp4.
+real time record video off of camera then parse video into individual frames
 '''
 import cv2
 import numpy as np
 import os
-
-# Playing video from file:
-cap = cv2.VideoCapture('example.m4v')
+import time
 
 try:
     if not os.path.exists('data'):
@@ -25,19 +13,19 @@ try:
 except OSError:
     print ('Error: Creating directory of data')
 
-currentFrame = 0
-while(True):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
 
-    # Saves image of the current frame in jpg file
-    name = './data/frame' + str(currentFrame) + '.jpg'
+start = time.time() + 3
+#start2 = start + 12
+currentFrame = 0
+cap = cv2.VideoCapture(0) 
+while time.time() <= start:
+    ret, frame = cap.read()
+    name = './data/frame' + str(currentFrame) + '.png'
     print ('Creating...' + name)
     cv2.imwrite(name, frame)
-
-    # To stop duplicate images
+    
     currentFrame += 1
-
 # When everything done, release the capture
-cap.release()
 cv2.destroyAllWindows()
+cap.release()
+#cv2.destroyAllWindows()
