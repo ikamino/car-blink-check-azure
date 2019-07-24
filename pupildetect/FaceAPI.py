@@ -99,7 +99,24 @@ print("\n \n")
 print('There are ', count_open_list, ' terms in the open list.')
 print('There are ', count_close_list, ' terms in the close list.')
 
+closed_times = []
+print (closed_times)
+# while counter < count_open_list:
 
+#     print (position_closed, position_open)
+#     if position_closed < position_open:
+#         closed_times.append('closed')
+#         counter += 1 
+#     else:
+#         counter += 1
+i = 0
+counter = 0
+for b in range (i, count_open_list):
+    # print (counter)
+    position_open = (open_list[counter])
+    position_closed = (close_list[counter])
+    print ([position_closed], [position_open])
+    counter += 1
 
 # ;sldjfkl;adjsfl;kadslfjasl;dkjfkl;dsjf
 
