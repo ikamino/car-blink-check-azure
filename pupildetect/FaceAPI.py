@@ -99,8 +99,7 @@ print("\n \n")
 print('There are ', count_open_list, ' terms in the open list.')
 print('There are ', count_close_list, ' terms in the close list.')
 
-closed_times = []
-print (closed_times)
+
 # while counter < count_open_list:
 
 #     print (position_closed, position_open)
