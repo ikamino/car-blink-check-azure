@@ -19,6 +19,9 @@ params = {
     'returnFaceAttributes': 'glasses'  
 }
 
+# imgur to azure
+# imgurResp = request.post("imgururl", data={"image": file.read(path)})
+# request.post("azureurl", data={"url": imgurResp.json()["url"]})
 
 for image in opened:
 
@@ -116,6 +119,8 @@ for b in range (i, count_open_list):
     position_closed = (close_list[counter])
     print ([position_closed], [position_open])
     counter += 1
+
+
 
 # ;sldjfkl;adjsfl;kadslfjasl;dkjfkl;dsjf
 
