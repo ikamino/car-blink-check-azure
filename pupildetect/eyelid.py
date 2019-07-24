@@ -6,8 +6,8 @@ assert subscription_key
 face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
 
 
-control = ['https://cdn.discordapp.com/attachments/413154933278507008/603370106558611456/20190723_163111_HDR.jpg']
-images = ['https://cdn.discordapp.com/attachments/413154933278507008/603370106558611456/20190723_163111_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603370088325971988/20190723_163114_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603370087247773706/20190723_163116_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603370044008955924/20190723_163117_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603370042884620289/20190723_163119_HDR.jpg']
+control = ['https://cdn.discordapp.com/attachments/413154933278507008/603706754961899550/20190724_145400_HDR.jpg']
+images = ['https://cdn.discordapp.com/attachments/413154933278507008/603706745063473202/20190724_145405_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706743712776204/20190724_145402_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706720736378908/20190724_145419.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706719037554708/20190724_145423_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706691573252098/20190724_145425_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706659411591179/20190724_145432_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706658757017611/20190724_145430_HDR.jpg']
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 
 
@@ -83,17 +83,21 @@ i = 0
 place = 0
 closed_times = []
 test = []
-custom_control = (control_value - 10)
+custom_control = (control_value - 20)
 for b in range (i, terms_in_diffs):
     if image_diffs[place] < (custom_control):
         closed_times.append('closed')
+        if len(closed_times) >= 3:
+            print('help')
+            break
         place += 1
 
     elif image_diffs[place] >= custom_control:
         test.append('open')
         del (closed_times[0:len(closed_times)])
         place += 1
+    
 
 
 print (image_diffs)
-print (test)
+print (len(test))
