@@ -26,11 +26,11 @@ def imgur(name):
 
 client_id = 'a230297bd00d52a'
 
-os_type = int (input('press 0 if you are using an mac and 1 if you are usign an windows PC '))
+
 
 start = time.time() + 6
 currentFrame = 0
-cap = cv2.VideoCapture(os_type) 
+cap = cv2.VideoCapture(0) 
 while time.time() <= start:
     ret, frame = cap.read()
     name = './frame' + str(currentFrame) + '.png'
