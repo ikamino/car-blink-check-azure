@@ -1,13 +1,56 @@
 import requests
 import json
-subscription_key = 'ffb1c11d2a624e4e8ba551f1b7a5349e'
+import cv2
+import numpy as np
+import os
+import time
+import urllib.request
+import urllib.parse
+import base64
+import time
+subscription_key = 'fc9c9a47ba614db49c896d82a6d28282'
 assert subscription_key
+
+def imgur(name):
+    f = open(name, "rb")
+    image_data = f.read()
+    headers = {'Authorization': 'Client-ID ' + client_id}
+    data = {'image': base64.standard_b64encode(image_data), 'title': 'test'} # create a dictionary.
+    request = urllib.request.Request(url="https://api.imgur.com/3/upload.json", data=urllib.parse.urlencode(data).encode("utf-8"),headers=headers)
+    response = urllib.request.urlopen(request).read()
+    parse = json.loads(response)
+    parse2 = (parse['data']['link'])
+    return parse2
+
+
+client_id = 'a230297bd00d52a'
+
+os_type = int (input('press 0 if you are using an mac and 1 if you are usign an windows PC '))
+
+album = []
+start = time.time() + 6
+currentFrame = 0
+cap = cv2.VideoCapture(os_type) 
+while time.time() <= start:
+    ret, frame = cap.read()
+    name = './frame' + str(currentFrame) + '.png'
+    print ('Creating...' + name)
+    cv2.imwrite(name, frame)
+    imgur(name)
+    url = (imgur(name))
+    album.append(url)
+    os.remove(name)
+    currentFrame += 1
+    
+# Stop recording
+cv2.destroyAllWindows()
+cap.release()
 
 face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
 
 
 control = ['https://cdn.discordapp.com/attachments/413154933278507008/603706754961899550/20190724_145400_HDR.jpg']
-images = ['https://cdn.discordapp.com/attachments/413154933278507008/603706745063473202/20190724_145405_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706743712776204/20190724_145402_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706720736378908/20190724_145419.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706719037554708/20190724_145423_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706691573252098/20190724_145425_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706659411591179/20190724_145432_HDR.jpg', 'https://cdn.discordapp.com/attachments/413154933278507008/603706658757017611/20190724_145430_HDR.jpg']
+images = album
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 
 
@@ -87,8 +130,8 @@ custom_control = (control_value - 20)
 for b in range (i, terms_in_diffs):
     if image_diffs[place] < (custom_control):
         closed_times.append('closed')
-        if len(closed_times) >= 3:
-            print('help')
+        if len(closed_times) >= 4:
+            print('\a')
             break
         place += 1
 
@@ -101,3 +144,4 @@ for b in range (i, terms_in_diffs):
 
 print (image_diffs)
 print (len(test))
+

