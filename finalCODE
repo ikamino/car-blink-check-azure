@@ -6,6 +6,7 @@ CODE FOR ALARM:
     freq = 440
     winsound.Beep(freq, duration)
     print ('\007') OR print('\a')
+'''
 
 
 
