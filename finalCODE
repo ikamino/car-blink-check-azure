@@ -1,3 +1,15 @@
+'''
+THIS IS THE FINAL CODE FOR THE PROJECT
+CODE FOR ALARM: 
+    import winsound 
+    duration = 1000
+    freq = 440
+    winsound.Beep(freq, duration)
+    print ('\007') OR print('\a')
+
+
+
+
 import requests
 import cv2
 import numpy as np
