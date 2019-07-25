@@ -8,6 +8,7 @@ import urllib.request
 import urllib.parse
 import base64
 import time
+import sys
 subscription_key = 'fc9c9a47ba614db49c896d82a6d28282'
 assert subscription_key
 
@@ -25,31 +26,51 @@ def imgur(name):
 
 client_id = 'a230297bd00d52a'
 
-os_type = int (input('press 0 if you are using an mac and 1 if you are usign an windows PC '))
 
-album = []
-start = time.time() + 6
-currentFrame = 0
-cap = cv2.VideoCapture(os_type) 
-while time.time() <= start:
+print('Please open your eyes and look at the camera')
+control = []
+
+control_frame = 0
+cap = cv2.VideoCapture(0) 
+
+if control_frame == 0:
     ret, frame = cap.read()
-    name = './frame' + str(currentFrame) + '.png'
-    print ('Creating...' + name)
-    cv2.imwrite(name, frame)
-    imgur(name)
-    url = (imgur(name))
-    album.append(url)
-    os.remove(name)
-    currentFrame += 1
-    
-# Stop recording
-cv2.destroyAllWindows()
-cap.release()
+    control_name = './frame' + str(control_frame) + '.png'
+    print ('Creating...' + control_name)
+    cv2.imwrite(control_name, frame)
+    imgur(control_name)
+    url_control = (imgur(control_name))
+    control.append(url_control)
+    os.remove(control_name)
+    control_frame += 1
+
+print ('Calibration complete.')
+a = input('Continue? (y/n)')
+if a == 'y':
+    start = time.time() + 30
+    currentFrame = 0
+    cap = cv2.VideoCapture(0) 
+    album = []
+    while time.time() <= start:
+        ret, frame = cap.read()
+        name = './frame' + str(currentFrame) + '.png'
+        #print ('Creating...' + name)
+        cv2.imwrite(name, frame)
+        url_return = imgur(name)
+        #print (url_return)
+        album.append(url_return)
+        #print (album)
+        os.remove(name)
+        currentFrame += 1
+    # Stop recording
+    cv2.destroyAllWindows()
+    cap.release()
+else:
+    sys.exit()
 
 face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
 
 
-control = ['https://cdn.discordapp.com/attachments/413154933278507008/603706754961899550/20190724_145400_HDR.jpg']
 images = album
 headers = {'Ocp-Apim-Subscription-Key': subscription_key}
 
@@ -126,11 +147,11 @@ i = 0
 place = 0
 closed_times = []
 test = []
-custom_control = (control_value - 20)
+custom_control = (control_value / 2)
 for b in range (i, terms_in_diffs):
     if image_diffs[place] < (custom_control):
         closed_times.append('closed')
-        if len(closed_times) >= 4:
+        if len(closed_times) >= 3:
             print('\a')
             break
         place += 1
@@ -143,5 +164,5 @@ for b in range (i, terms_in_diffs):
 
 
 print (image_diffs)
-print (len(test))
+print (len(test), "open values")
 
