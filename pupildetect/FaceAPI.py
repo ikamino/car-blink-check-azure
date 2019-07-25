@@ -1,34 +1,32 @@
-import requests
 import json
+import urllib
+import requests
+
+from pprint import pprint
+from os.path import expanduser
 subscription_key = 'ffb1c11d2a624e4e8ba551f1b7a5349e'
+
+
+
+
 assert subscription_key
 
 face_api_url = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect'
 
-image_url = 'https://media.discordapp.net/attachments/413154933278507008/603272127176507392/20190723_100743.jpg?width=681&height=908'
-headers = {'Ocp-Apim-Subscription-Key': subscription_key}
+
+headers = {'Content-Type': 'application/octet-stream','Ocp-Apim-Subscription-Key': subscription_key}
+
 
 params = { 
     'returnFaceId': 'flase',
-    'returnFaceLandmarks': 'true'  
+    'returnFaceLandmarks': 'true',
+    'returnFaceAttributes': 'glasses'  
 }
 
 
 
-response = requests.post(face_api_url, params=params,
-                         headers=headers, json={"url": image_url})
-
-
-
-data = response.json()
-
-face_data = data[0]
-faceLandmarks = (face_data['faceLandmarks'])
-
-#print (faceLandmarks)
-
-pupilLeft = faceLandmarks['pupilLeft']
-pupilRight = faceLandmarks['pupilRight']
-print ("Pupil Left:", pupilLeft)
-print ("Pupil Right:", pupilRight)
-
+data = open('C:/Users/Jim Patterson/Desktop/justin.jpg', 'rb')
+response = requests.post(face_api_url, data=data, headers=headers)
+b = response.json()
+face_data = b[0]
+print (b)
