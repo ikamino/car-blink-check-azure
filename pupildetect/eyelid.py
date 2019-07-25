@@ -47,7 +47,7 @@ if control_frame == 0:
 print ('Calibration complete.')
 a = input('Continue? (y/n)')
 if a == 'y':
-    start = time.time() + 30
+    start = time.time() + 6
     currentFrame = 0
     cap = cv2.VideoCapture(0) 
     album = []
@@ -151,7 +151,7 @@ custom_control = (control_value / 2)
 for b in range (i, terms_in_diffs):
     if image_diffs[place] < (custom_control):
         closed_times.append('closed')
-        if len(closed_times) >= 3:
+        if len(closed_times) >= 2:
             print('\a')
             break
         place += 1
